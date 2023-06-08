@@ -4,6 +4,8 @@ const url = 'https://api.github.com/users';
 
 const FetchData = () => {
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchData = async() => {
@@ -13,15 +15,27 @@ const FetchData = () => {
         setUsers(users);
       } catch (error) {
         console.log(error);
+        setError(true);
       }
+
+      setIsLoading(false);
     }
 
     fetchData();
   },[]);
+
+  if(isLoading) {
+    return <h1>Loading....</h1>
+  }
+
+  if (error) {
+    return <h1>Something went wrong...</h1>
+  }
   
   return <section>
     <h3>Github Users</h3>
     <ul className="users">
+      {console.log(users)}
       {users.map(user => {
         const {id, login, avatar_url, html_url} = user;
         return(
