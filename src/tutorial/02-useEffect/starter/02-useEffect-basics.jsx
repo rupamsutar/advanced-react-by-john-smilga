@@ -9,7 +9,7 @@ const UseEffectBasics = () => {
 
   sayHello();
 
-  useEffect(() => {
+  useEffect(() => { 
     console.log("Its Rupam here")
   }, []);
 
